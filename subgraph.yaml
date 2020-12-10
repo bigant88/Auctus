@@ -1,0 +1,32 @@
+specVersion: 0.0.1
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: auctus
+    network: mainnet
+    source:
+      address: "0xc12d099be31567add4e4e4d0d45691c3f58f5663"
+      abi: auctus
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.2
+      language: wasm/assemblyscript
+      entities:
+        - Burn
+        - Transfer
+        - Approval
+        - Transfer1
+      abis:
+        - name: auctus
+          file: ./abis/auctus.json
+      eventHandlers:
+        - event: Burn(indexed address,uint256)
+          handler: handleBurn
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256,indexed bytes)
+          handler: handleTransfer1
+      file: ./src/mapping.ts
