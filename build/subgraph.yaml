@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: auctus
@@ -19,7 +19,7 @@ dataSources:
         - Transfer1
       abis:
         - name: auctus
-          file: ./abis/auctus.json
+          file: auctus/abis/auctus.json
       eventHandlers:
         - event: Burn(indexed address,uint256)
           handler: handleBurn
@@ -29,4 +29,4 @@ dataSources:
           handler: handleApproval
         - event: Transfer(indexed address,indexed address,uint256,indexed bytes)
           handler: handleTransfer1
-      file: ./src/mapping.ts
+      file: auctus/auctus.wasm
